@@ -1,0 +1,164 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">
+    Employment History
+    <span class="float-right">Employee ID: {{emp_id}}</span>
+  </nb-card-header>
+  <nb-card-body>
+    <toaster-container ></toaster-container>
+    <form [formGroup]="employmentForm" class="p-20" id="two-column">
+      <div formArrayName="employmentRows">
+        <div *ngFor="let employmentRow of employmentForm.controls.employmentRows['controls']; let i=index" [formGroupName]="i">
+          <nb-card-header>
+            Previous Employer Details #{{ i + 1 }}
+            <i class="material-icons text-danger" (click)="onDelete(employmentRow)"> delete_forever</i>
+            
+          </nb-card-header>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="employerName">Employer Name
+                  <sup class="text-danger">*</sup>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </span>
+                  <input type="text" formControlName="employerName" #employerName class="form-control" id="employerName" placeholder="Enter Your previous employer"
+                    data-validation="required">
+                </div>
+                <mat-error *ngIf="employmentRow.controls.employerName.invalid && (employmentRow.controls.employerName.dirty || employmentRow.controls.employerName.touched)">
+                  Employer Name is required.</mat-error>
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="location">Location
+                  <sup class="text-danger">*</sup>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-pencil"></i>
+                  </span>
+                  <input type="text" formControlName="location" #location class="form-control" id="location" placeholder="Where it is located?"
+                    data-validation="length" data-validation-length="min5">
+                </div>
+                <mat-error *ngIf="employmentRow.controls.location.invalid && (employmentRow.controls.location.dirty || employmentRow.controls.location.touched)">
+                  Location is required.</mat-error>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="designation">Designation
+                  <sup class="text-danger">*</sup>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                  </span>
+                  <input type="text" formControlName="designation" #designation class="form-control" id="designation" placeholder="Enter Your designation there"
+                    data-validation="required">
+                </div>
+                <mat-error *ngIf="employmentRow.controls.designation.invalid && (employmentRow.controls.designation.dirty || employmentRow.controls.designation.touched)">
+                  Designation is required.</mat-error>
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="salary">Salary
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-pencil"></i>
+                  </span>
+                  <input type="text" formControlName="salary" #salary class="form-control" id="salary" placeholder="Enter your last drawn salary"
+                    data-validation="length" data-validation-length="min5">
+                </div>
+                <mat-error *ngIf="employmentRow.controls.salary.invalid && (employmentRow.controls.salary.dirty || employmentRow.controls.salary.touched)">
+                  Salary is required.</mat-error>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="startdate">Start Date
+                  <sup class="text-danger">*</sup>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                  <mat-form-field class="form-control">
+                    <input matInput [matDatepicker]="startdatepicker" formControlName="startdate" placeholder="(MM/DD/YYYY)" required>
+                    <mat-datepicker-toggle matSuffix [for]="startdatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startdatepicker disabled="false"></mat-datepicker>
+                    <mat-error *ngIf="employmentRow.controls.startdate.invalid && (employmentRow.controls.startdate.dirty || employmentRow.controls.startdate.touched)">
+                      Start Date is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="enddate">End Date
+                  <sup class="text-danger">*</sup>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                  <mat-form-field class="form-control">
+                    <input matInput [matDatepicker]="enddatepicker" formControlName="enddate" placeholder="(MM/DD/YYYY)" required>
+                    <mat-datepicker-toggle matSuffix [for]="enddatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #enddatepicker disabled="false"></mat-datepicker>
+                    <mat-error *ngIf="employmentRow.controls.enddate.invalid && (employmentRow.controls.enddate.dirty || employmentRow.controls.enddate.touched)">
+                      End Date is required.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <mat-error *ngIf="employmentRow.controls.enddate.invalid && (employmentRow.controls.enddate.dirty || employmentRow.controls.enddate.touched)">
+                  End Date is required.</mat-error>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+
+          <!-- /.col-md-12 -->
+
+          <div class="col-md-12">
+            <div class="btn-group pull-right mt-10" role="group">
+              <button type="submit" (click)="addEmploymentRow('','','','','','','')" class="btn btn-success btn-wide">
+                <i class="fa fa-arrow-right"></i>Add</button>
+
+              <button type="submit" (click)="onEmploymentSave()" [disabled]="!employmentForm.valid" class="btn btn-success btn-wide">
+                <i class="fa fa-arrow-right"></i>Save</button>
+              <button type="reset" ng-click="tabs[1].active = true" class="btn btn-gray btn-wide">
+                <i class="fa fa-times"></i>Next</button>
+
+            </div>
+            <!-- /.btn-group -->
+          </div>
+
+
+
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

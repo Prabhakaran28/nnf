@@ -1,0 +1,87 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">Search Backlink Files
+    <span class="float-right">
+      <a class="text-white" routerLink="/pages/seo/uploadbacklink" routerLinkActive="active">Upload Files</a>
+    </span>
+  </nb-card-header>
+  <nb-card-body>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="status">Status </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-thermometer-quarter"></i>
+            </span>
+            <select class="form-control" id="status" (change)="onStatusChange(status.selectedOption.id)" [(ngModel)]="status.selectedOption.id">
+              <option #document *ngFor="let s of status.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="vaidationStartDateControl">Start Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="vaidationStartDateControl" [(ngModel)]="batch.startdate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="vaidationStartDateControl"></mat-datepicker-toggle>
+              <mat-datepicker #vaidationStartDateControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="vaidationEndDateControl">End Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="vaidationEndDateControl" [(ngModel)]="batch.enddate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="vaidationEndDateControl"></mat-datepicker-toggle>
+              <mat-datepicker #vaidationEndDateControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="float-right bottom-align-text">
+          <br/>
+          <br/>
+          <button class="btn btn-search" id="search" (click)="onSearch()">
+            <i class="fa fa-search"></i> &nbsp; Search</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+    </div>
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-body>
+    <toaster-container></toaster-container>
+    <span class="float-left">
+      <b> Row Count: {{source.count()}}</b>
+    </span>
+    <ng2-smart-table [settings]="settings" [source]="source">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

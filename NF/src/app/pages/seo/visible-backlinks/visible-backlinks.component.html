@@ -1,0 +1,185 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">Search Visible Backlinks
+  </nb-card-header>
+  <nb-card-body>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="website">Website
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <select class="form-control" id="website" [(ngModel)]="website">
+              <option #document *ngFor="let s of websites" [ngValue]="s.WEBSITES">{{ s.WEBSITES }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="domain">Published Domain
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <input type="text" class="form-control" id="domain" [(ngModel)]="domain" placeholder="Domain" data-validation="domain">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="link">Published Link
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <input type="text" class="form-control" id="link" [(ngModel)]="link" placeholder="Link" data-validation="link">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="source">Source </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-thermometer-quarter"></i>
+            </span>
+            <select class="form-control" id="source" [(ngModel)]="source.selectedOption.id">
+              <option #document *ngFor="let s of source.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="firstseenStartDateControl">First Seen Start Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="firstseenStartDateControl" [(ngModel)]="firstSeenStartDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="firstseenStartDateControl"></mat-datepicker-toggle>
+              <mat-datepicker #firstseenStartDateControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="firstseenEndDateControl">First Seen End Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="firstseenEndDateControl" [(ngModel)]="firstSeenEndDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="firstseenEndDateControl"></mat-datepicker-toggle>
+              <mat-datepicker #firstseenEndDateControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="lostStartDateControl">Link Lost Start Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="lostStartDateControl" [(ngModel)]="lostStartDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="lostStartDateControl"></mat-datepicker-toggle>
+              <mat-datepicker #lostStartDateControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="lostEndDateControl">Link Lost End Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="lostEndDateControl" [(ngModel)]="lostStartDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="lostEndDateControl"></mat-datepicker-toggle>
+              <mat-datepicker #lostEndDateControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="websitePage">Website Page
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <input type="text" class="form-control" id="websitePage" [(ngModel)]="websitePage" placeholder="websitePage" data-validation="websitePage">
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="createdLink">Created Links </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-thermometer-quarter"></i>
+            </span>
+            <select class="form-control" id="createdLink" (change)="onCreatedLinkChange(createdLink.selectedOption.id)" [(ngModel)]="createdLink.selectedOption.id">
+              <option #document *ngFor="let s of createdLink.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="float-right bottom-align-text">
+          <br/>
+          <br/>
+          <button class="btn btn-search" id="search" (click)="onSearch()">
+            <i class="fa fa-search"></i> &nbsp; Search</button>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-body>
+    <toaster-container></toaster-container>
+    <span class="float-left">
+      <b> Row Count: {{tablesource.count()}}</b>
+    </span>
+
+    <span class="float-right">
+      <export-table [source]="tablesource" [settings]="settings"></export-table>
+    </span>
+
+    <ng2-smart-table [settings]="settings" [source]="tablesource">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

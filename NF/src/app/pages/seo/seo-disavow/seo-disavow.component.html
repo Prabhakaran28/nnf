@@ -1,0 +1,15 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">DisaVow
+  </nb-card-header>
+  <nb-card-body>
+    <toaster-container></toaster-container>
+    <span class="float-left">
+      <b> Row Count: {{tablesource.count()}}</b>
+    </span>
+    <span class="float-right">
+      <export-table [source]="tablesource" [settings]="settings"></export-table>
+    </span>
+    <ng2-smart-table [settings]="settings" [source]="tablesource">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,262 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">
+    <div *ngIf="editmode">Edit ICV: {{blic_id}}
+      <span class="float-right">
+        Status: {{blic_status}}
+      </span>
+    </div>
+    <div *ngIf="!editmode">Create ICV </div>
+
+  </nb-card-header>
+  <nb-card-body>
+    <toaster-container></toaster-container>
+    <form [formGroup]="maintainicvform" novalidate #f='ngForm'>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="status">Status </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-check-circle"></i>
+              </span>
+              <select class="form-control" id="status" [ngModelOptions]="{standalone: true}" [(ngModel)]="status.selectedOption.id" (change)="onStatusChange();">
+                <option #document *ngFor="let s of status.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" [hidden]="!rejectionstatus">
+          <div class="form-group">
+            <label for="rejectionReason">Rejection Reason
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-check-circle"></i>
+              </span>
+              <select class="form-control" id="rejectionReason" formControlName="rejectionReasonControl">
+                <option *ngFor="let s of rejectionReason.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+              </select>
+            </div>
+            <mat-error *ngIf="maintainicvform.get('rejectionReasonControl').hasError('required')">
+              Select Rejection Reason</mat-error>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="backlinkSiteControl">Backlink Site
+              <sup [hidden]="rejectionstatus" class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" name="backlinkSiteControl" formControlName="backlinkSiteControl" #backlinkSite class="form-control" id="backlinkSiteControl"
+                placeholder="Backlink Site" required>
+            </div>
+            <mat-error *ngIf="maintainicvform.get('backlinkSiteControl').hasError('required') && (maintainicvform.controls.backlinkSiteControl.dirty || maintainicvform.controls.backlinkSiteControl.touched)">
+              Backlink Site is required</mat-error>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="category">Category
+              <sup [hidden]="rejectionstatus" class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-check-circle"></i>
+              </span>
+              <select class="form-control" id="category" formControlName="categoryControl">
+                <option *ngFor="let s of category.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+              </select>
+            </div>
+            <mat-error *ngIf="maintainicvform.get('categoryControl').hasError('required')">
+              Select Category</mat-error>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="process">Process
+              <sup [hidden]="rejectionstatus" class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-check-circle"></i>
+              </span>
+              <select class="form-control" id="process" formControlName="processControl">
+                <option *ngFor="let s of process.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+              </select>
+            </div>
+            <mat-error *ngIf="maintainicvform.get('processControl').hasError('required')">
+              Select Process</mat-error>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="dateIdenfiiedControl">Date Identified
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </span>
+              <mat-form-field class="form-control">
+                <input matInput [matDatepicker]="dateIdenfiiedControl" placeholder="(MM/DD/YYYY)" formControlName="dateIdenfiiedControl">
+                <mat-datepicker-toggle matSuffix [for]="dateIdenfiiedControl"></mat-datepicker-toggle>
+                <mat-datepicker #dateIdenfiiedControl disabled="false"></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="domainAuthorityControl">Domain Authority
+              <sup [hidden]="rejectionstatus" class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-tasks"></i>
+              </span>
+              <input type="text" class="form-control" id="domainAuthorityControl" formControlName="domainAuthorityControl" placeholder="Domain Authority"
+                data-validation="domainAuthorityControl">
+            </div>
+            <mat-error *ngIf="maintainicvform.get('domainAuthorityControl').hasError('required') && (maintainicvform.controls.domainAuthorityControl.dirty || maintainicvform.controls.domainAuthorityControl.touched)">
+              Domain Authority is required</mat-error>
+
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="sourceControl">Source
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-tasks"></i>
+              </span>
+              <input type="text" class="form-control" id="sourceControl" formControlName="sourceControl" placeholder="Source" data-validation="sourceControl">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="sourceURLControl">Source URL
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-tasks"></i>
+              </span>
+              <input type="text" class="form-control" id="sourceURLControl" formControlName="sourceURLControl" placeholder="Source URL"
+                data-validation="sourceURLControl">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="followflag">Follow Flag
+              <sup [hidden]="rejectionstatus" class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-check-circle"></i>
+              </span>
+              <select class="form-control" id="profollowflagcess" formControlName="followFlagControl">
+                <option *ngFor="let s of followflag.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+              </select>
+            </div>
+            <mat-error *ngIf="maintainicvform.get('followFlagControl').hasError('required')">
+              Select Follow Flag</mat-error>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="remarksControl">Remarks
+              <sup [hidden]="!rejectionstatus" class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-tasks"></i>
+              </span>
+              <input type="text" class="form-control" id="remarksControl" formControlName="remarksControl" placeholder="Remarks" data-validation="remarksControl">
+            </div>
+            <mat-error *ngIf="maintainicvform.get('remarksControl').hasError('required') && (maintainicvform.controls.remarksControl.dirty || maintainicvform.controls.remarksControl.touched)">
+              Remarks is required if Rejected</mat-error>
+
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </nb-card-body>
+</nb-card>
+<div class="form-group row">
+  <div class="col-lg-12">
+    <div *ngIf="editmode">
+      <span class="float-left">
+        <button class="btn btn-danger" (click)="onSubmit(f,'D')">Delete ICV</button>
+      </span>
+    </div>
+    <span class="float-right">
+      <button type="submit" class="btn btn-success" [disabled]="!f.valid" (click)="onSubmit(f,editmode ? 'M' : 'C')">Save</button>
+
+      <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+
+    </span>
+  </div>
+</div>
+<div *ngIf="!editmode">
+  <nb-card>
+    <nb-card-header class="bg-primary text-white">
+      Upload ICV Source Files
+    </nb-card-header>
+    <nb-card-body>
+      <toaster-container [toasterconfig]="config"></toaster-container>
+      <div class="row">
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fileuploader">Upload</label>
+            <div class="input-group">
+              <input type="file" id="fileuploader" ng2FileSelect [uploader]="uploader" accept=".csv" multiple/>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <span class="float-left">
+            <b> Row Count: {{filesource.count()}}</b>
+          </span>
+          <div class="float-right">
+            <!--<export-table [source]="source" [settings]="settings"></export-table>-->
+          </div>
+          <ng2-smart-table [settings]="settings" [source]="filesource" (deleteConfirm)="onDelete($event)">
+          </ng2-smart-table>
+        </div>
+      </div>
+
+    </nb-card-body>
+  </nb-card>
+  <div class="form-group row">
+    <div class="col-lg-12">
+      <span class="float-right">
+        <button class="btn btn-search" (click)="onCancel()">Back</button>
+      </span>
+    </div>
+  </div>
+</div>

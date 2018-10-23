@@ -1,0 +1,108 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">Search Employee
+    <span class="float-right">
+      <a class="text-white" routerLink="/pages/hrms/maintainEmployee" routerLinkActive="active">Create Employee</a>
+    </span>
+  </nb-card-header>
+  <nb-card-body>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="employeeId">Employee ID
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-envelope"></i>
+            </span>
+            <input type="text" class="form-control" id="employeeId" [(ngModel)]="employee.EMPH_ID" placeholder="Employee Id" data-validation="employeeId">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="firstname">First Name
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-user"></i>
+            </span>
+            <input type="text" class="form-control" id="firstname" [(ngModel)]="employee.EMPH_FIRSTNAME" placeholder="First Name">
+          </div>
+        </div>
+      </div>
+      <!-- /.col-md-6 -->
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="lastname">Last Name
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-id-card"></i>
+            </span>
+            <input type="text" class="form-control" id="lastname" [(ngModel)]="employee.EMPH_LASTNAME" placeholder="Last Name">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="designation">Designation
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-id-card"></i>
+            </span>
+            <input type="text" class="form-control" id="designation" [(ngModel)]="employee.EMPH_DESIGNATION" placeholder="Designation">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="dob">Date of Birth
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-id-card"></i>
+            </span>
+            <input type="text" class="form-control" id="dob" [(ngModel)]="employee.EMPH_DATEOFBIRTH" placeholder="Date of Birth">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="float-right bottom-align-text">
+          <br/>
+          <br/>
+          <button class="btn btn-search" id="search" (click)="onSearch()">
+            <i class="fa fa-search"></i> &nbsp; Search</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+    </div>
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <!--
+    <nb-card-header class="bg-primary text-white">
+      Users
+      <span class="float-right">
+        <a class="text-white" routerLink="/pages/system/maintainuser" routerLinkActive="active">Create Users</a>
+      </span>
+    </nb-card-header>
+    -->
+  <nb-card-body>
+
+
+
+    <toaster-container ></toaster-container>
+    <ng2-smart-table [settings]="settings" [source]="source" >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

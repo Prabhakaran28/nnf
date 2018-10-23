@@ -1,0 +1,40 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">
+    Upload Backlink Documents
+  </nb-card-header>
+  <nb-card-body>
+    <toaster-container [toasterconfig]="config"></toaster-container>
+    <div class="row">
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="fileuploader">Upload</label>
+          <div class="input-group">
+            <input type="file" id="fileuploader" ng2FileSelect [uploader]="uploader" accept=".csv" multiple/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <span class="float-left">
+          <b> Row Count: {{filesource.count()}}</b>
+        </span>
+        <div class="float-right">
+          <!--<export-table [source]="source" [settings]="settings"></export-table>-->
+        </div>
+        <ng2-smart-table [settings]="settings" [source]="filesource" (deleteConfirm)="onDelete($event)">
+        </ng2-smart-table>
+      </div>
+    </div>
+
+  </nb-card-body>
+</nb-card>
+<div class="form-group row">
+  <div class="col-lg-12">
+    <span class="float-right">
+      <button class="btn btn-search" (click)="onCancel()">Back</button>
+    </span>
+  </div>
+</div>

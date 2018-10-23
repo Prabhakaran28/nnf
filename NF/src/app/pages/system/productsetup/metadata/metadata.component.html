@@ -1,0 +1,20 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">Maintain Metadata
+      <span class="float-right">
+          <a routerLink="/pages/system/createmetadata" routerLinkActive="active">Create Metadata </a>
+        </span>
+  </nb-card-header>
+  <nb-card-body>
+    
+    </nb-card-body>
+</nb-card>
+<nb-card>
+    <nb-card-body>
+      <toaster-container ></toaster-container>
+      <div class="float-right">
+        <!--<export-table [source]="source" [settings]="settings"></export-table>-->
+      </div>
+      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDelete($event)">
+      </ng2-smart-table>
+      </nb-card-body>
+  </nb-card>

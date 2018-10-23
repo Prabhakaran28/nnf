@@ -1,0 +1,138 @@
+// @nebular theming framework
+@import '~@nebular/theme/styles/theming';
+// @nebular out of the box themes
+@import '~@nebular/theme/styles/themes';
+
+// which themes you what to enable (empty to enable all)
+$nb-enabled-themes: (default, cosmic);
+
+$nb-themes: nb-register-theme((
+ // app wise variables for each theme
+  sidebar-header-gap: 0rem,
+  sidebar-header-height: initial,
+  layout-content-width: 1400px,
+
+  //font-main: Roboto,
+  //font-secondary: Exo,
+), default, default);
+
+$nb-themes: nb-register-theme((
+  // app wise variables for each theme
+  sidebar-header-gap: 0rem,
+  sidebar-header-height: initial,
+  layout-content-width: 1400px,
+  //font-main: Roboto,
+  //font-secondary: Exo,
+), cosmic, cosmic);
+.color-test{
+  color:black;
+}
+$nb-themes: nb-register-theme((
+  //color-back:  -webkit-linear-gradient(top, #4c4c4c 0%,#595959 12%,#666666 25%,#474747 39%,#2b2b2b 76%,#1c1c1c 91%,#2c2c2c 95%,#2c2c2c 95%,#111111 99%,#111111 99%,#131313 100%), /* Chrome10-25,Safari5.1-6 */
+  //Smart Table - Starts
+  smart-table-line-height: 1,
+  smart-table-header-bg: color-info,
+  smart-table-header-fg: #ffffff,
+  //separator: #d7dbdf,
+  //Start table -Ends
+  // Button - Starts
+  btn-padding-y-md: 1px,
+  btn-padding-x-md: 5px,
+  btn-font-size-md: 12px,
+  btn-secondary-bg: #6c757d,
+  btn-secondary-border: #6c757d,
+  btn-fg: #ffffff,
+  // Button - Endss
+  //Common Custimization - Starts
+  font-main: Poppins,
+  font-secondary: Poppins,
+  //font-weight-bold: 700,
+  //font-size-lg: 12.463px,
+  font-size: 13.3px,
+ // padding: 10px 15px,
+  
+  form-control-font-size: 12.0926px,
+  //form-control-sm-padding:0.4375em,
+  //form-control-lg-padding: 0.4375em,
+  header-height: 4.75rem,
+  form-control-placeholder-font-size: 14px,
+  color-primary: #3498db,// #3c3c3c,
+  color-back: #3c3c3c,
+  color-front: rgb(242, 242, 242),
+
+  form-control-border-width: 1px,
+  form-control-selected-border-color:#292929,
+  
+  link-color: #ffffff,
+  link-color-hover: #292929,//#ffffff,
+  //header-bg: color-back,
+  //header-fg: color-front,
+  //footer-bg: color-back,
+  //Common Custimization - Ends
+  //Tabs Customization - Starts
+    popover-border:#292929,
+    popover-bg: #3c3c3c,
+    context-menu-fg: #ffffff,
+    tabs-active-bg: #3498db,
+    tabs-selected: #3498db,
+    context-menu-active-bg: #292929,
+    tabs-fg-heading:  #ffffff,
+    tabs-font-size: 12.463px,
+    tabs-padding: 15px 25px,
+    tabs-content-padding: 10px,
+  //Tabs Customization - Ends
+//Side Menu Customization - Ends
+  sidebar-bg: #3c3c3c,
+  sidebar-fg: rgb(242, 242, 242),
+  sidebar-line-height:24.5px,
+  sidebar-padding: 0,
+  menu-bg: #3c3c3c,
+  menu-fg:rgb(242, 242, 242),
+  menu-active-bg: #292929,
+  menu-active-fg:rgb(242, 242, 242),
+  menu-icon-color: rgb(242, 242, 242),
+  menu-icon-active-color: rgb(242, 242, 242),
+  menu-submenu-bg: #3c3c3c,
+  menu-submenu-fg:rgb(242, 242, 242),
+  menu-submenu-active-bg: #292929,
+  menu-submenu-active-fg:rgb(242, 242, 242),
+  menu-submenu-active-border-color: #292929,
+  menu-submenu-hover-bg:#292929,
+  menu-submenu-item-padding: 0.5rem 3rem,
+  menu-submenu-item-container-padding: 0,
+  menu-font-weight: 400,
+  menu-font-size: 14px,
+  card-fg-text: #494949,
+  card-font-size: 13.3px,
+  //Side Menu Customization - Ends
+  /*
+  color-back: #004B8D,
+  //color-back: -webkit-linear-gradient(top, rgba(109,179,242,1) 0%,rgba(54,144,240,1) 51%,rgba(30,105,222,1) 100%),
+  color-sback: -webkit-linear-gradient(top, rgba(32,124,202,1) 2%,rgba(41,137,216,1) 92%,rgba(30,87,153,1) 100%), 
+  color-saback: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(32,124,202,1) 100%,rgba(125,185,232,1) 100%,rgba(32,124,202,1) 102%),
+  color-maback: -webkit-linear-gradient(top, rgba(125,126,125,1) 99%,rgba(14,14,14,1) 100%),
+  //header-fg: color-fg-heading,
+  color-front: white,
+  //color-primary: -webkit-linear-gradient(top, rgba(32,124,202,1) 2%,rgba(41,137,216,1) 92%,rgba(30,87,153,1) 100%), 
+  color-primary:color-back, //#007bff,
+  header-bg: color-back,
+  header-fg: color-front,
+  footer-bg: color-back,
+  footer-fg: color-front,
+  sidebar-bg:  color-back,
+  sidebar-fg: color-front, 
+  menu-bg:  color-back,
+  menu-fg:color-front,
+  menu-active-fg: color-front,
+  //menu-active-bg:-webkit-linear-gradient(top, rgba(125,126,125,1) 99%,rgba(14,14,14,1) 100%),
+  menu-active-bg: color-maback,
+  menu-submenu-bg:color-sback,
+  menu-submenu-fg: black,
+  menu-submenu-active-fg: color-front,
+  menu-submenu-active-bg: color-saback,
+  menu-submenu-hover-bg: color-saback,
+  menu-group-fg: color-front,
+  smart-table-header-fg:color-front,
+  smart-table-header-bg: color-sback//#007bff,//color-back,
+  */
+), default, default); // let's leave it as default

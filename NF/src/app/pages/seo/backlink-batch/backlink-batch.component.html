@@ -1,0 +1,145 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">Search Backlink Batch
+  </nb-card-header>
+  <nb-card-body>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label for="batchid">Batch Id
+        </label>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-tasks"></i>
+          </span>
+          <input type="number" class="form-control" id="batchid" [(ngModel)]="batchid" placeholder="Batch Id" data-validation="batchid">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="status">status </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="status"  [(ngModel)]="status.selectedOption.id">
+              <option #document *ngFor="let s of status.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- /.col-md-6 -->
+      <div class="col-md-4">
+        <label for="error">Error
+        </label>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-tasks"></i>
+          </span>
+          <input type="text" class="form-control" id="error" [(ngModel)]="error" placeholder="Error Description" data-validation="error">
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="fromStartDatecontrol">From Start Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="fromStartDatecontrol" [(ngModel)]="fromStartDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="fromStartDatecontrol"></mat-datepicker-toggle>
+              <mat-datepicker #fromStartDatecontrol disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="toStartDatecontrol">To Start Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="toStartDatecontrol" [(ngModel)]="toStartDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="toStartDatecontrol"></mat-datepicker-toggle>
+              <mat-datepicker #toStartDatecontrol disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="fromenddatecontrol">From End Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="fromenddatecontrol" [(ngModel)]="fromenddate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="fromenddatecontrol"></mat-datepicker-toggle>
+              <mat-datepicker #fromenddatecontrol disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="toEndDatecontrol">To End date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="toEndDatecontrol" [(ngModel)]="toEndDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="toEndDatecontrol"></mat-datepicker-toggle>
+              <mat-datepicker #toEndDatecontrol disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="float-right bottom-align-text">
+          <br/>
+          <br/>
+          <button class="btn btn-success" id="startbatch" (click)="onBatchStart()">
+             Start Batch</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="float-right bottom-align-text">
+          <br/>
+          <br/>
+          <button class="btn btn-search" id="search" (click)="onSearch()">
+            <i class="fa fa-search"></i> &nbsp; Search</button>
+        </div>
+      </div>
+    </div>
+    
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-body>
+    <toaster-container></toaster-container>
+    <span class="float-left">
+        <b> Row Count: {{source.count()}}</b>
+    </span>
+    <ng2-smart-table [settings]="settings" [source]="source">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

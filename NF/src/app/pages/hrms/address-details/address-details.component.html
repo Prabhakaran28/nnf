@@ -1,0 +1,261 @@
+<form [formGroup]="addressdetailsform" #f="ngForm">
+  <nb-card>
+    <nb-card-header class="bg-primary text-white">
+      Communication Address
+      <span class="float-right">Employee ID: {{emp_id}}</span>
+    </nb-card-header>
+    <nb-card-body>
+      <toaster-container ></toaster-container>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="streetAddress1">Street Address Line 1</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-map-signs"></i>
+              </span>
+              <input type="text" name="streetAddress1" formControlName="streetAddress1" #streetAddress1 class="form-control" id="streetAddress1"
+                placeholder="Enter Address Line 1">
+            </div>
+            <mat-error *ngIf="addressdetailsform.controls['streetAddress1'].invalid && (addressdetailsform.controls['streetAddress1'].dirty || addressdetailsform.controls['streetAddress1'].touched)">
+              Address Line 1 is required</mat-error>
+
+          </div>
+        </div>
+        <!-- /.col-md-12 -->
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="streetAddress2">Street Address Line 2</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-map-signs"></i>
+              </span>
+              <input type="text" name="streetAddress2" formControlName="streetAddress2" #streetAddress2 class="form-control" id="streetAddress2"
+                placeholder="Enter Adddress Line 2">
+            </div>
+          </div>
+        </div>
+        <!-- /.col-md-12 -->
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="city">City</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-building"></i>
+              </span>
+              <input type="text" name="city" #city class="form-control" formControlName="city" id="city" placeholder="Enter Your City"
+                value="{{f.value.city}}">
+            </div>
+            <mat-error *ngIf="addressdetailsform.controls['city'].invalid && (addressdetailsform.controls['city'].dirty || addressdetailsform.controls['city'].touched)">
+                City is required</mat-error>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="state">State</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-compass"></i>
+              </span>
+              <input type="text" name="state" #state formControlName="state" class="form-control" id="state" placeholder="Enter Your State">
+            </div>
+            <mat-error *ngIf="addressdetailsform.controls['state'].invalid && (addressdetailsform.controls['state'].dirty || addressdetailsform.controls['state'].touched)">
+                State is required</mat-error>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="country">Country</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-map-pin"></i>
+              </span>
+              <input type="text" name="country" #country formControlName="country" class="form-control" id="country" placeholder="Enter Your Country">
+            </div>
+            <mat-error *ngIf="addressdetailsform.controls['country'].invalid && (addressdetailsform.controls['country'].dirty || addressdetailsform.controls['country'].touched)">
+                Country is required</mat-error>              
+          </div>
+        </div>
+
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="zip">Zip Code</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-flag-o"></i>
+              </span>
+              <input type="text" name="zip" #zip formControlName="zip" class="form-control" id="zip" placeholder="Enter Your Zip Code">
+              <mat-error *ngIf="addressdetailsform.controls['zip'].invalid && (addressdetailsform.controls['zip'].dirty || addressdetailsform.controls['zip'].touched)">
+                  Zip is required</mat-error>                            
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="Phone No">Phone</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-phone"></i>
+              </span>
+              <input type="text" name="phone" #phone formControlName="phone" class="form-control" id="phone" placeholder="Enter Phone No">
+            </div>
+            <mat-error *ngIf="addressdetailsform.controls['phone'].invalid && (addressdetailsform.controls['phone'].dirty || addressdetailsform.controls['phone'].touched)">
+                Phone is required</mat-error>                            
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  <nb-card>
+    <nb-card-header class="bg-primary text-white">
+      Permanent Address
+      <span class="float-right">
+        <input type="checkbox" #check name="cbcopyAddress" formControlName="cbcopyAddress"  (click)="copyAddress(f)" class="blue-style">
+        <label for="one" class="radio-label">Use Communication Address</label>
+      </span>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="pstreetAddress1">Address Line 1</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-map-signs"></i>
+              </span>
+              <input type="text" name="pstreetAddress1" #pstreetAddress1 formControlName="pstreetAddress1" class="form-control" id="pstreetAddress1"
+                placeholder="Enter Address Line 1" value="{{f.value.pstreetAddress1}}">
+            </div>
+            <mat-error *ngIf="addressdetailsform.controls['pstreetAddress1'].invalid && (addressdetailsform.controls['pstreetAddress1'].dirty || addressdetailsform.controls['pstreetAddress1'].touched)">
+                Address Line 1 is required</mat-error>                            
+          </div>
+        </div>
+        <!-- /.col-md-12 -->
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="pstreetAddress2">Address Line 2</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-map-signs"></i>
+              </span>
+              <input type="text" name="pstreetAddress2" #pstreetAddress2 formControlName="pstreetAddress2" class="form-control" id="pstreetAddress2"
+                placeholder="Enter Address Line 2" value="{{f.value.pstreetAddress2}}">
+            </div>
+          </div>
+        </div>
+        <!-- /.col-md-12 -->
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="pcity">City</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-building"></i>
+              </span>
+              <input type="text" name="pcity" #pcity class="form-control" formControlName="pcity" id="pcity" placeholder="Enter Your City"
+                value="{{f.value.pcity}}">
+            </div>
+            <mat-error *ngIf="addressdetailsform.controls['pcity'].invalid && (addressdetailsform.controls['pcity'].dirty || addressdetailsform.controls['pcity'].touched)">
+                City is required</mat-error>                            
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="pstate">State</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-compass"></i>
+              </span>
+              <input type="text" name="pstate" #pstate formControlName="pstate" class="form-control" id="pstate" placeholder="Enter Your State"
+                value="{{f.value.pstate}}">
+            </div>
+            <mat-error *ngIf="addressdetailsform.controls['pstate'].invalid && (addressdetailsform.controls['pstate'].dirty || addressdetailsform.controls['pstate'].touched)">
+                State is required</mat-error>                            
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="pcountry">Country</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-map-pin"></i>
+              </span>
+              <input type="text" name="pcountry" #pcountry formControlName="pcountry" class="form-control" id="pcountry" placeholder="Enter Your Country"
+                value="{{f.value.pcountry}}">
+            </div>
+            <mat-error *ngIf="addressdetailsform.controls['pcountry'].invalid && (addressdetailsform.controls['pcountry'].dirty || addressdetailsform.controls['pcountry'].touched)">
+                Country is required</mat-error>                            
+          </div>
+        </div>
+
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="pzip">Zip Code</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-flag-o"></i>
+              </span>
+              <input type="text" name="pzip" #pzip formControlName="pzip" class="form-control" id="pzip" placeholder="Enter Your Zip Code"
+                value="{{f.value.pzip}}">
+            </div>
+            <mat-error *ngIf="addressdetailsform.controls['pzip'].invalid && (addressdetailsform.controls['pzip'].dirty || addressdetailsform.controls['pzip'].touched)">
+                Zip is required</mat-error>                            
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="Phone No">Phone</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-phone"></i>
+              </span>
+              <input type="text" name="pphone" #pphone formControlName="pphone" class="form-control" id="pphone" placeholder="Enter Phone No">
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  <!-- /.col-md-12   (click)="onClickSave(firstName.value,lastName.value,email.value,phone.value,streetAddress1.value,city.value,state.value,country.value,zip.value)" -->
+
+  <div class="col-md-12">
+    <div class="btn-group pull-right mt-10" role="group">
+      <button type="submit" (click)="onSubmit(f)" [disabled]="!f.valid" class="btn btn-success btn-wide">
+        Save and Continue &nbsp;
+        <i class="fa fa-arrow-right"></i>
+      </button>
+      <button (click)="onNext()" class="btn btn-outline-primary">
+        <i class="fa fa-times"></i>Next</button>
+
+    </div>
+    <!-- /.btn-group -->
+  </div>
+  <!-- /.col-md-12 -->
+
+
+</form>

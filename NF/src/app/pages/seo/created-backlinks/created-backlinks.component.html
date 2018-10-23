@@ -1,0 +1,163 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">Search Created Backlinks
+  </nb-card-header>
+  <nb-card-body>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="website">Website
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <select class="form-control" id="website" [(ngModel)]="website">
+              <option #document *ngFor="let s of websites" [ngValue]="s.WEBSITES">{{ s.WEBSITES }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="domain">Published Domain
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <input type="text" class="form-control" id="domain" [(ngModel)]="domain" placeholder="Published Domain" data-validation="domain">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="link">Published Link
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <input type="text" class="form-control" id="link" [(ngModel)]="link" placeholder="Link" data-validation="link">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="source">Source </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-thermometer-quarter"></i>
+            </span>
+            <select class="form-control" id="source" [(ngModel)]="source.selectedOption.id">
+              <option #document *ngFor="let s of source.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="vaidationStartDateControl">Created Start Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="vaidationStartDateControl" [(ngModel)]="startdate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="vaidationStartDateControl"></mat-datepicker-toggle>
+              <mat-datepicker #vaidationStartDateControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="vaidationEndDateControl">Created End Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="vaidationEndDateControl" [(ngModel)]="enddate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="vaidationEndDateControl"></mat-datepicker-toggle>
+              <mat-datepicker #vaidationEndDateControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="keyword">Keyword
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <input type="text" class="form-control" id="keyword" [(ngModel)]="keyword" placeholder="Keyword" data-validation="keyword">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="createdby">Created By
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <select class="form-control" id="createdby" [(ngModel)]="createdby">
+              <option #document *ngFor="let s of createdbys" [ngValue]="s.BLCR_LINK_CREATED_BY">{{ s.BLCR_LINK_CREATED_BY }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="visible">Link Visible </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-thermometer-quarter"></i>
+            </span>
+            <select class="form-control" id="visible" (change)="onVisibleChange(visible.selectedOption.id)" [(ngModel)]="visible.selectedOption.id">
+              <option #document *ngFor="let s of visible.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="float-right bottom-align-text">
+          <br/>
+          <br/>
+          <button class="btn btn-search" id="search" (click)="onSearch()">
+            <i class="fa fa-search"></i> &nbsp; Search</button>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-body>
+    <toaster-container></toaster-container>
+    <span class="float-left">
+      <b> Row Count: {{tablesource.count()}}</b>
+    </span>
+    <span class="float-right">
+      <export-table [source]="tablesource" [settings]="settings"></export-table>
+    </span>
+
+    <ng2-smart-table [settings]="settings" [source]="tablesource">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

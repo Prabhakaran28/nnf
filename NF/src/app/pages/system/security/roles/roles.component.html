@@ -1,0 +1,17 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">
+    Roles
+    <span class="float-right">
+      <a routerLink="/pages/system/maintainrole" routerLinkActive="active">Create Role</a>
+    </span>
+  </nb-card-header>
+
+  <nb-card-body>
+    <toaster-container ></toaster-container>
+    <div class="float-right">
+      <export-table [source]="source" [settings]="settings" ></export-table>
+    </div>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

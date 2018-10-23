@@ -1,0 +1,139 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">
+    Education Details
+    <span class="float-right">Employee ID: {{emp_id}}</span>
+  </nb-card-header>
+  <nb-card-body>
+    <toaster-container ></toaster-container>
+    <form [formGroup]="educationForm" class="p-20" id="two-column">
+      <div formArrayName="educationRows">
+        <div *ngFor="let educationRow of educationForm.controls.educationRows['controls']; let i=index" [formGroupName]="i">
+          <nb-card-header>
+            Education Qualification #{{ i + 1 }}
+              <i class="material-icons text-danger" (click)="onDelete(educationRow)"> delete_forever</i>
+          </nb-card-header>
+          <hr>
+          <div class="row"></div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="institutionName">Institution Name
+                  <sup class="text-danger">*</sup>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-university"></i>
+                  </span>
+                  <input type="text" name="institutionName" formControlName="institutionName" #institutionName class="form-control" id="institutionName"
+                    placeholder="Enter Your Full Name" required>
+                </div>
+                <mat-error *ngIf="educationRow.controls.institutionName.invalid && (educationRow.controls.institutionName.dirty || educationRow.controls.institutionName.touched)">
+                  InstitutionName is required.</mat-error>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="locationName">Location
+                  <sup class="text-danger">*</sup>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-location-arrow"></i>
+                  </span>
+                  <input type="text" formControlName="locationName" #locationName class="form-control" id="locationName" placeholder="Enter Institution Location"
+                    data-validation="length" data-validation-length="min5">
+                </div>
+                <mat-error *ngIf="educationRow.controls.locationName.invalid && (educationRow.controls.locationName.dirty || educationRow.controls.locationName.touched)">
+                  Location is required</mat-error>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="degree">Degree
+                  <sup class="text-danger">*</sup>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-graduation-cap"></i>
+                  </span>
+                  <input type="text" formControlName="degree" #degree class="form-control" id="degree" placeholder="Enter Degree Nam" data-validation="required">
+                </div>
+                <mat-error *ngIf="educationRow.controls.degree.invalid && (educationRow.controls.degree.dirty || educationRow.controls.degree.touched)">
+                  Degree is required</mat-error>
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="specialization">Specialization
+                  <sup class="text-danger">*</sup>
+                </label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-line-chart"></i>
+                  </span>
+                  <input type="text" formControlName="specialization" #specialization class="form-control" id="specialization" placeholder="Enter Specialization"
+                    data-validation="length" data-validation-length="min5">
+                </div>
+                <mat-error *ngIf="educationRow.controls.specialization.invalid && (educationRow.controls.specialization.dirty || educationRow.controls.specialization.touched)">
+                  Specialization is required</mat-error>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="month">Month</label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-calendar-check-o"></i>
+                  </span>
+                  <input type="month" formControlName="month" #month class="form-control" id="month">
+                </div>
+                <mat-error *ngIf="educationRow.controls.month.invalid && (educationRow.controls.month.dirty || educationRow.controls.month.touched)">
+                  Month and Year is required</mat-error>
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="number">Percentage</label>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-calculator"></i>
+                  </span>
+                  <input type="number" formControlName="percentage" #percentage class="form-control" id="percentage" placeholder="Enter Percentage"
+                    pattern="[0-9]+">
+                </div>
+                <mat-error *ngIf="educationRow.controls.percentage.invalid && (educationRow.controls.percentage.dirty || educationRow.controls.percentage.touched)">
+                  Percentage is required</mat-error>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="btn-group pull-right mt-10" role="group">
+          <button type="submit" (click)="addEducationRow('','','','','','','')" class="btn btn-success btn-wide">
+            <i class="fa fa-arrow-right"></i>Add</button>
+          <button type="submit" (click)="onEducationSave()" [disabled]="!educationForm.valid" class="btn btn-success btn-wide">
+            <i class="fa fa-arrow-right"></i>Save and Continue</button>
+        </div>
+        <!-- /.btn-group -->
+      </div>
+
+    </form>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,411 @@
+<!--
+
+<form [formGroup]="personaldetailsform" #f='ngForm'>
+  <nb-card>
+    <nb-card-header class="bg-primary text-white">
+      Employee ID: {{emp_id}} 
+      <span class="float-right"> Status:</span>
+    </nb-card-header>
+    <nb-card-body>
+      <toaster-container [toasterconfig]="config"></toaster-container>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field>
+            <mat-placeholder>
+              <i class="fa fa-user">&nbsp;First Name</i>
+            </mat-placeholder>
+            <input matInput #firstname formControlName="firstnameControl" [errorStateMatcher]="matcher" required>
+            <mat-error *ngIf="personaldetailsform.get('firstnameControl').hasError('required')">
+              First Name is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <mat-placeholder>
+              <i class="fa fa-user">&nbsp;Middle Name</i>
+            </mat-placeholder>
+            <input matInput formControlName="middlenameControl" [errorStateMatcher]="matcher">
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field>
+            <mat-placeholder>
+              <i class="fa fa-user">&nbsp;Last Name</i>
+            </mat-placeholder>
+            <input matInput formControlName="lastnameControl" [errorStateMatcher]="matcher" required>
+            <mat-error *ngIf="personaldetailsform.get('lastnameControl').hasError('required')">
+              Last Name is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field>
+            <input matInput [matDatepicker]="dobpicker" formControlName="dobFormControl" placeholder="Date of Birth(MM/DD/YYYY)" required>
+            <mat-datepicker-toggle matSuffix [for]="dobpicker"></mat-datepicker-toggle>
+            <mat-datepicker #dobpicker disabled="false"></mat-datepicker>
+            <mat-error *ngIf="personaldetailsform.get('dobFormControl').hasError('required')">
+              Please enter valid
+              <strong>Date</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field>
+              <input matInput [matDatepicker]="dojpicker" formControlName="dojFormControl" placeholder="Date of Joining(MM/DD/YYYY)" required>
+              <mat-datepicker-toggle matSuffix [for]="dojpicker"></mat-datepicker-toggle>
+              <mat-datepicker #dojpicker disabled="false"></mat-datepicker>
+              <mat-error *ngIf="personaldetailsform.get('dojFormControl').hasError('required')">
+                Please enter valid
+                <strong>Date</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>        
+        <div class="col-md-4">
+          <mat-form-field>
+            <input matInput placeholder="Email" formControlName="emailFormControl" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="personaldetailsform.get('emailFormControl').hasError('email') && !personaldetailsform.get('emailFormControl').hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="personaldetailsform.get('emailFormControl').hasError('required')">
+              Email is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  <div class="col-md-12">
+    <div class="btn-group pull-right mt-10" role="group">
+      <button type="submit" (click)="onSubmit(f)" [disabled]="submitted || !f.valid" class="btn btn-success btn-wide">
+        Save and Continue &nbsp; <i class="fa fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+</form>
+-->
+<form [formGroup]="personaldetailsform" #f='ngForm'>
+  <nb-card>
+    <nb-card-header class="bg-primary text-white">
+      Employee ID: {{emp_id}}
+      <!--<span class="float-right"> Status:</span>-->
+    </nb-card-header>
+    <nb-card-body>
+      <toaster-container ></toaster-container>
+      <div class="row">
+
+        <div class="col-md-4">
+          <div class="form-group" *ngIf="sequenceTypeVisible">
+            <label for="sequenceTypeControl">Sequence Type </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-check-circle"></i>
+              </span>
+              <select class="form-control" id="sequenceTypeControl" formControlName="sequenceTypeControl">
+                <option *ngFor="let s of sequenceType" [ngValue]="s">{{ s }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group" *ngIf="empIdVisibility && !editmode">
+            <label for="empIdControl">Employee ID
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" name="empIdControl" formControlName="empIdControl" #empIdControl class="form-control" id="emp_id" placeholder="Employee ID">
+            </div>
+            <mat-error *ngIf="personaldetailsform.controls.empIdControl.invalid && (personaldetailsform.controls.empIdControl.dirty || personaldetailsform.controls.empIdControl.touched)">
+              Employee ID is required.</mat-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4" *ngIf = "personaldetailsform.controls.loginIdControl.value===null">
+          <div class="form-group">
+            <label for="autoCreateUserControl">Auto Create Login </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-lock"></i>
+              </span>
+              <select class="form-control" id="autoCreateUserControl" formControlName="autoCreateUserControl">
+                <option *ngFor="let a of autoCreateUser" [ngValue]="a">{{ a }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" *ngIf = "personaldetailsform.controls.loginIdControl.value===null">
+          <div class="form-group">
+            <label for="securityRoleControl">Security Role </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-lock"></i>
+              </span>
+              <select class="form-control" id="securityRoleControl" formControlName="securityRoleControl">
+                <option *ngFor="let a of securityRole" [ngValue]="a">{{ a }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="loginIdControl">Login ID
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" name="loginIdControl" formControlName="loginIdControl" #loginIdControl class="form-control" id="loginIdControl" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row"></div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="firstnameControl">First Name
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" name="firstnameControl" formControlName="firstnameControl" #firstnameControl class="form-control" id="firstName"
+                placeholder="Enter First Name" required>
+            </div>
+            <mat-error *ngIf="personaldetailsform.controls.firstnameControl.invalid && (personaldetailsform.controls.firstnameControl.dirty || personaldetailsform.controls.firstnameControl.touched)">
+              First Name is required.</mat-error>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="middlenameControl">Middle Name
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" name="middlenameControl" formControlName="middlenameControl" #middlenameControl class="form-control" id="middlenameControl"
+                placeholder="Enter Middle Name">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="lastnameControl">Last Name
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" name="lastnameControl" formControlName="lastnameControl" #lastnameControl class="form-control" id="firstName"
+                placeholder="Enter Last Name" required>
+            </div>
+            <mat-error *ngIf="personaldetailsform.controls.lastnameControl.invalid && (personaldetailsform.controls.lastnameControl.dirty || personaldetailsform.controls.lastnameControl.touched)">
+              Last Name is required.</mat-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="dobFormControl">Date of Birth
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </span>
+              <mat-form-field class="form-control">
+                <input matInput [matDatepicker]="dobFormControlpicker" formControlName="dobFormControl" placeholder="(MM/DD/YYYY)" required>
+                <mat-datepicker-toggle matSuffix [for]="dobFormControlpicker"></mat-datepicker-toggle>
+                <mat-datepicker #dobFormControlpicker disabled="false"></mat-datepicker>
+                <mat-error *ngIf="personaldetailsform.controls.dobFormControl.invalid && (personaldetailsform.controls.dobFormControl.dirty || personaldetailsform.controls.dobFormControl.touched)">
+                  Date of Birth is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="dojFormControl">Date of Joining
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </span>
+              <mat-form-field class="form-control">
+                <input matInput [matDatepicker]="dojFormControlpicker" formControlName="dojFormControl" placeholder="(MM/DD/YYYY)" required>
+                <mat-datepicker-toggle matSuffix [for]="dojFormControlpicker"></mat-datepicker-toggle>
+                <mat-datepicker #dojFormControlpicker disabled="false"></mat-datepicker>
+                <mat-error *ngIf="personaldetailsform.controls.dojFormControl.invalid && (personaldetailsform.controls.dojFormControl.dirty || personaldetailsform.controls.dojFormControl.touched)">
+                  Date of Joining is required.
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="emailFormControl">Email
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" name="emailFormControl" formControlName="emailFormControl" #emailFormControl class="form-control" id="firstName"
+                placeholder="Enter Email" required>
+            </div>
+            <mat-error *ngIf="personaldetailsform.controls.emailFormControl.invalid && (personaldetailsform.controls.emailFormControl.dirty || personaldetailsform.controls.emailFormControl.touched)">
+              Email is required.</mat-error>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  <div class="col-md-12">
+    <div class="btn-group pull-right mt-10" role="group">
+      <button type="submit" (click)="onSubmit(f)" [disabled]="!f.valid" class="btn btn-success btn-wide">
+        Save and Continue &nbsp;
+        <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+</form>
+<!--
+<form #pf="ngForm" autocomplete="nope">
+  <nb-card>
+    <nb-card-header class="bg-primary text-white">
+      Employee ID:
+      <span class="float-right"> Status:</span>
+    </nb-card-header>
+    <nb-card-body>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="firstName">First Name
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" name="firstName" ngModel #firstName="ngModel" class="form-control" placeholder="Enter Your Full Name"
+                [disabled]="submitted" required>
+            </div>
+
+            <small class="form-text error" *ngIf="firstName.invalid && firstName.touched && firstName.errors?.required">
+              FirstName is required!
+            </small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="middlename">Middle Name
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" name="middlename" ngModel #middlename="ngModel" class="form-control" placeholder="Enter Middle Name">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="lastName">Last Name
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-pencil"></i>
+              </span>
+              <input name="lastName" type="text" ngModel #lastName="ngModel" class="form-control" id="lastName" placeholder="Enter Desired Username"
+                [disabled]="submitted" data-validation="length" data-validation-length="min5" required>
+            </div>
+
+            <small class="form-text error" *ngIf="lastName.invalid && lastName.touched && lastName.errors?.required">
+              LastName is required!
+            </small>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date of Birth">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+
+          <div class="form-group">
+            <label for="email">Email address
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-envelope-o"></i>
+              </span>
+              <input type="email" name="email" ngModel #email="ngModel" class="form-control" id="email" placeholder="Enter Your Email Id"
+                [disabled]="submitted" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,6})+$">
+            </div>
+
+            <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
+              Email is required!
+            </small>
+            <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.pattern">
+              Email should be the real one!
+            </small>
+          </div>
+        </div>
+
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="phone">Contact Number
+              <sup class="text-danger">*</sup>
+            </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-phone-square"></i>
+              </span>
+              <input type="text" name="phone" ngModel #phone="ngModel" class="form-control" id="phone" placeholder="Enter Your Mobile Phone Number"
+                [disabled]="submitted" required minlength=10 maxlength=10 pattern="[0-9]+">
+
+            </div>
+            <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
+              Phone Number is required!
+            </small>
+            <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.pattern">
+              Phone Number should be Number!
+            </small>
+          </div>
+        </div>
+
+      </div>
+    </nb-card-body>
+  </nb-card>
+
+</form>
+-->

@@ -1,0 +1,122 @@
+<nb-card>
+  <!--  <nb-card-header class="bg-primary text-white">SEO Dashboard
+      </nb-card-header>
+    -->
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="fromControl">From Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="fromControl" [(ngModel)]="fromDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="fromControl"></mat-datepicker-toggle>
+              <mat-datepicker #fromControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="ToControl">To Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="ToControl" [(ngModel)]="toDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="ToControl"></mat-datepicker-toggle>
+              <mat-datepicker #ToControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="source">Chart Type </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="source" [(ngModel)]="source.selectedOption.id">
+              <option #document *ngFor="let s of source.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+      <b>Total Promotional Sites: {{totalSites}}</b>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+          <div class="float-right bottom-align-text">
+            <br/>
+            <br/>
+            <button class="btn btn-search" id="search" (click)="onSearch()">
+              <i class="fa fa-refresh"></i> &nbsp; Refresh</button>
+          </div>
+        </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+<nb-card *ngIf="websitechart">
+  <nb-card-body>
+    <toaster-container></toaster-container>
+    <div class="md-col-12">
+      <div *ngIf="resourcechart">
+        <canvas height="50px" id="resourcechartcanvas">{{ resourcechart}}</canvas>
+      </div>
+
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="subchart" [hidden]="!showChart">
+  <nb-card-body>
+
+    <div class="md-col-6">
+      <div *ngIf="categorychart">
+        <canvas height="150px" id="categorychartcanvas">{{ categorychart }}</canvas>
+      </div>
+    </div>
+    <div class="md-col-6">
+      <div *ngIf="websitechart">
+        <canvas height="150px" id="websitechartcanvas">{{ websitechart }}</canvas>
+      </div>
+    </div>
+    <div class="md-col-6" >
+      <div *ngIf="rejectchart" [hidden] = "!showReject">
+        <canvas height="150px" id="rejectchartcanvas">{{ rejectchart }}</canvas>
+      </div>
+    </div>
+    
+  </nb-card-body>
+</nb-card>
+<div *ngIf="detailTable">
+  <nb-card>
+    <nb-card-header class="bg-primary text-white">{{rejectionReason }}
+    </nb-card-header>
+    <nb-card-body>
+      <span class="float-left">
+        <b> Row Count: {{detailsource.count()}}</b>
+      </span>
+      <span class="float-right">
+        <export-table [source]="detailsource" [settings]="settings"></export-table>
+      </span>
+      <ng2-smart-table [settings]="detailsettings" [source]="detailsource">
+      </ng2-smart-table>
+    </nb-card-body>
+  </nb-card>
+
+</div>

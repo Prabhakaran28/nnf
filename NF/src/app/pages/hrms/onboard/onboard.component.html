@@ -1,0 +1,51 @@
+<nb-card>
+       <nb-tabset>
+        <nb-tab tabTitle="Personal Details" [active]="tabs[0].active">
+            <personal-details [employee_id]="emp_id" (nextab)="onNext($event,0)"></personal-details>
+        </nb-tab>
+
+        <nb-tab *ngIf="isEmpIdGenerated" tabTitle="Address Details" [active]="tabs[1].active">
+            <address-details [employee_id]="emp_id" (nextab)="onNext('',1)"></address-details>
+        </nb-tab>
+        <nb-tab *ngIf="isEmpIdGenerated" tabTitle="Education Qualification" [active]="tabs[2].active">
+            <education-details [employee_id]="emp_id" (nextab)="onNext('',2)"></education-details>
+        </nb-tab>
+        <nb-tab *ngIf="isEmpIdGenerated" tabTitle="Employment History" [active]="tabs[3].active">
+            <employment-history [employee_id]="emp_id" (nextab)="onNext('',3)"></employment-history>
+        </nb-tab>
+        <nb-tab *ngIf="isEmpIdGenerated" tabTitle="Attachment Details" [active]="tabs[4].active">
+            <attachment-details [employee_id]="emp_id" (nextab)="onNext('',4)"></attachment-details>
+        </nb-tab>
+    </nb-tabset>
+
+<!-- 
+    <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+    </button>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step>
+            <ng-template matStepLabel>Fill out your name</ng-template>
+            <personal-details [employee_id]="emp_id" (nextab)="onNext($event,0)"></personal-details>
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+        <mat-step>
+                <ng-template matStepLabel>Fill out your address</ng-template>
+                <address-details [employee_id]="emp_id" (nextab)="onNext('',1)"></address-details>
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            You are now done.
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</nb-card>
+-->

@@ -1,0 +1,181 @@
+<nb-card>
+    <nb-card-header class="bg-primary text-white">
+
+        <div>Create Metadata </div>
+    </nb-card-header>
+    <nb-card-body>
+        <toaster-container></toaster-container>
+        <form [formGroup]="createMetadataform" novalidate #f='ngForm'>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="moduleControl">Module
+                            <sup class="text-danger">*</sup>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" name="moduleControl" formControlName="moduleControl" #module class="form-control" id="moduleControl" placeholder="Module"
+                                required>
+                        </div>
+                        <mat-error *ngIf="createMetadataform.get('moduleControl').hasError('required') && (createMetadataform.controls.moduleControl.dirty || createMetadataform.controls.moduleControl.touched)">
+                            Module is required</mat-error>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="subModuleControl">Sub Module
+                            <sup class="text-danger">*</sup>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" name="subModuleControl" formControlName="subModuleControl" #subModule class="form-control" id="subModuleControl"
+                                placeholder="Sub Module" required>
+                        </div>
+                        <mat-error *ngIf="createMetadataform.get('subModuleControl').hasError('required') && (createMetadataform.controls.subModuleControl.dirty || createMetadataform.controls.subModuleControl.touched)">
+                            Sub Module is required</mat-error>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="typeControl">Type
+                            <sup class="text-danger">*</sup>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" name="typeControl" formControlName="typeControl" #type class="form-control" id="typeControl" placeholder="Type"
+                                required>
+                        </div>
+                        <mat-error *ngIf="createMetadataform.get('typeControl').hasError('required') && (createMetadataform.controls.typeControl.dirty || createMetadataform.controls.typeControl.touched)">
+                            Type is required</mat-error>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="subTypeControl">Sub Type
+                            <sup class="text-danger">*</sup>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" name="subTypeControl" formControlName="subTypeControl" #subType class="form-control" id="subTypeControl"
+                                placeholder="Sub Type" required>
+                        </div>
+                        <mat-error *ngIf="createMetadataform.get('subTypeControl').hasError('required') && (createMetadataform.controls.subTypeControl.dirty || createMetadataform.controls.subTypeControl.touched)">
+                            Sub Type is required</mat-error>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="codeControl">Code
+                            <sup class="text-danger">*</sup>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" name="codeControl" formControlName="codeControl" #code class="form-control" id="codeControl" placeholder="Code"
+                                required>
+                        </div>
+                        <mat-error *ngIf="createMetadataform.get('codeControl').hasError('required') && (createMetadataform.controls.codeControl.dirty || createMetadataform.controls.codeControl.touched)">
+                            Code is required</mat-error>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="valueControl">Value
+                            <sup class="text-danger">*</sup>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" name="valueControl" formControlName="valueControl" #value class="form-control" id="valueControl" placeholder="Value"
+                                required>
+                        </div>
+                        <mat-error *ngIf="createMetadataform.get('valueControl').hasError('required') && (createMetadataform.controls.valueControl.dirty || createMetadataform.controls.valueControl.touched)">
+                            Value is required</mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="defaultControl">Default
+                            <sup class="text-danger">*</sup>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" name="defaultControl" formControlName="defaultControl" #default class="form-control" id="defaultControl"
+                                placeholder="Default" required maxlength=1>
+                        </div>
+                        <mat-error *ngIf="createMetadataform.get('defaultControl').hasError('required') && (createMetadataform.controls.defaultControl.dirty || createMetadataform.controls.defaultControl.touched)">
+                            Default is required</mat-error>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="activeControl">Active
+                            <sup class="text-danger">*</sup>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" name="activeControl" formControlName="activeControl" #active class="form-control" id="activeControl" placeholder="Active"
+                                required maxlength=1>
+                        </div>
+                        <mat-error *ngIf="createMetadataform.get('activeControl').hasError('required') && (createMetadataform.controls.activeControl.dirty || createMetadataform.controls.activeControl.touched)">
+                            Active is required</mat-error>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="createdByControl">Created By
+                            <sup class="text-danger">*</sup>
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input type="text" name="createdByControl" formControlName="createdByControl" #active class="form-control" id="createdBy"
+                                placeholder="Created by" required>
+                        </div>
+                        <mat-error *ngIf="createMetadataform.get('createdByControl').hasError('required') && (createMetadataform.controls.createdByControl.dirty || createMetadataform.controls.createdByControl.touched)">
+                            Created By is required</mat-error>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </nb-card-body>
+</nb-card>
+<div class="form-group row">
+    <div class="col-lg-12">
+        <div *ngIf="editmode">
+            <span class="float-left">
+                <button class="btn btn-danger" (click)="onSubmit(f,'D')">Delete ICV</button>
+            </span>
+        </div>
+        <span class="float-right">
+            <button type="submit" class="btn btn-success" [disabled]="!f.valid" (click)="onSubmit(f)">Save</button>
+
+            <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+
+        </span>
+    </div>
+</div>

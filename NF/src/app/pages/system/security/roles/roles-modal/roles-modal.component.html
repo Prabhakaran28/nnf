@@ -1,0 +1,18 @@
+<nb-card>
+    <nb-card-header  class = "bg-primary text-white">
+      Modules
+    </nb-card-header>
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (userRowSelect)="rowClicked($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+  </nb-card>
+  <div class="form-group row">
+    <div class="col-lg-12">
+      <span class="float-right">
+        <button class="btn btn-success" (click)="onAdd()">Add</button>
+        <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </span>
+    </div>
+  </div>
+  

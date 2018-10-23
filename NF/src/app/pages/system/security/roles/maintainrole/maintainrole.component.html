@@ -1,0 +1,74 @@
+<nb-card>
+
+  <nb-card-header  class = "bg-primary text-white">
+    <div *ngIf="role.SERO_ROLE_NAME==''">
+      Create Role</div>
+    <div *ngIf="role.SERO_ROLE_NAME !=''">
+      Edit Role</div>
+  </nb-card-header>
+  <nb-card-body>
+    <toaster-container ></toaster-container>
+    <form [formGroup]="maintainroleform" novalidate #f='ngForm' >
+      <div class="form-group row" [ngClass]="{'invalid-feedback': maintainroleform.controls.rolename.invalid 
+      && (maintainroleform.controls.rolename.dirty || maintainroleform.controls.rolename.touched)}">
+        <label for="rolename" class="col-md-5 col-form-label">Role Name</label>
+        <div class="col-md-7">
+
+          <input #rolename type="text" class="form-control" id="rolename" placeholder="Role Name" formControlName="rolename" name="rolename"
+            [(ngModel)]="role.SERO_ROLE_NAME" >
+          <div class="form-control-feedback" *ngIf="maintainroleform.get('rolename').hasError('required') && (maintainroleform.controls.rolename.dirty || maintainroleform.controls.rolename.touched)">
+            Role Name is required</div>
+          <div class="form-control-feedback" *ngIf="maintainroleform.get('rolename').hasError('pattern') && (maintainroleform.controls.rolename.dirty || maintainroleform.controls.rolename.touched)">
+            Role Name cannot have space</div>
+        </div>
+      </div>
+      <div class="form-group row" [ngClass]="{'invalid-feedback': maintainroleform.controls.roledescription.invalid 
+      && (maintainroleform.controls.roledescription.dirty || maintainroleform.controls.roledescription.touched)}">
+        <label for="roledescription" class="col-md-5 col-form-label required">Role Description</label>
+        <div class="col-md-7">
+
+          <input #roledescription type="text" class="form-control" id="roledescription" placeholder="Role Description" formControlName="roledescription"
+            name="roledescription" [(ngModel)]="role.SERO_ROLE_DESCRIPTION">
+          <div class="form-control-feedback" *ngIf="maintainroleform.controls.roledescription.invalid && (maintainroleform.controls.roledescription.dirty || maintainroleform.controls.roledescription.touched)">
+            Role Description is required</div>
+        </div>
+      </div>
+    </form>
+
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-header>
+    Module Permissions
+    <span class="float-right">
+
+      <button class="btn btn-search" (click)="showModuleModal()">Add Module Permissions</button>
+    </span>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="modulesettings" [source]="modulesource" (deleteConfirm)="onModuleDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-header>
+    Users
+    <span class="float-right">
+      <button class="btn btn-search" (click)="showUserModal()">Add Users</button>
+    </span>
+
+  </nb-card-header>
+  <nb-card-body>
+    <ng2-smart-table [settings]="usersettings" [source]="usersource" (deleteConfirm)="onUserDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+<div class="form-group row">
+  <div class="col-lg-12">
+    <span class="float-right">
+      <button type="submit" class="btn btn-success" (click)="onSave()">Save</button>
+      <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+    </span>
+  </div>
+</div>

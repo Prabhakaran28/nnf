@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import 'angular2-toaster/toaster.css';
+
+body{
+    letter-spacing:0.5px;
+    text-rendering: optimizeLegibility !important;
+    
+}
+
+.form-control {
+    padding:0.4375em;
+}
+
+.nb-theme-default .input-group-addon, .nb-theme-default .form-control {
+    padding:6.125px;
+    background-color: #ffffff;
+    color: #555555;
+
+}
+
+.nb-theme-default .input-group-addon, .nb-theme-default .input-group-icon {
+    font-size: 14px;
+}
+.nb-theme-default .input-group-addon, .nb-theme-default  {
+    padding:6.125px;
+    background-color: #eeeeee;
+    color: #555555;
+
+}
+.nb-theme-default select.form-control:not([size]):not([multiple]) {
+    height: calc(1rem + 20px);
+}
+.nb-theme-default ng2-smart-table thead tr.ng2-smart-filters th{
+    background: #ffffff;
+}
+
+/*To hide line under the Tab*/
+.nb-theme-default nb-tabset ul {
+    border-bottom-color: rgb(255, 255, 255);
+}
+
+/*To make sedcondary fg white*/
+.nb-theme-default .btn{
+    text-transform:none;
+}
+.btn.btn-search{
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+.nb-theme-default[_nghost-c3] .toggle-layout[_ngcontent-c3] a i, .nb-theme-default [_nghost-c3] .toggle-layout[_ngcontent-c3] a i {
+    color: #3c3c3c;
+    font-size: 2.25rem;
+}
+
+.nb-theme-default[_nghost-c6] .settings-row[_ngcontent-c6] a.selected[_ngcontent-c6], .nb-theme-default [_nghost-c6] .settings-row[_ngcontent-c6] a.selected[_ngcontent-c6] {
+    color: #3c3c3c;
+}

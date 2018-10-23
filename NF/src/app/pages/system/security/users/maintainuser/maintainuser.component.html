@@ -1,0 +1,139 @@
+<nb-card>
+
+  <nb-card-header class="bg-primary text-white">
+    <div *ngIf="user.SEUS_USER_ID==''">
+      Create User</div>
+    <div *ngIf="user.SEUS_USER_ID !=''">
+      Edit User</div>
+  </nb-card-header>
+  <nb-card-body>
+    <toaster-container></toaster-container>
+
+    <form [formGroup]="maintainuserform" novalidate #f='ngForm'>
+
+      <div class="form-group row" [ngClass]="{'invalid-feedback': maintainuserform.controls.userid.invalid 
+      && (maintainuserform.controls.userid.dirty || maintainuserform.controls.userid.touched)}">
+        <label for="userid" class="col-md-5 col-form-label">User ID</label>
+        <div class="col-md-7">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-id-card"></i>
+            </span>
+            <input #userid type="text" class="form-control" id="userid" placeholder="User ID" formControlName="userid" name="userid"
+              [(ngModel)]="user.SEUS_USER_ID" [attr.disabled]="editmode?'':null">
+          </div>
+          <div class="form-control-feedback" *ngIf="maintainuserform.get('userid').hasError('required') && (maintainuserform.controls.userid.dirty || maintainuserform.controls.userid.touched)">
+            User ID is required</div>
+          <div class="form-control-feedback" *ngIf="maintainuserform.get('userid').hasError('pattern') && (maintainuserform.controls.userid.dirty || maintainuserform.controls.userid.touched)">
+            User ID cannot have space</div>
+
+        </div>
+      </div>
+      <div class="form-group row" [ngClass]="{'invalid-feedback': maintainuserform.controls.username.invalid 
+      && (maintainuserform.controls.username.dirty || maintainuserform.controls.username.touched)}">
+        <label for="username" class="col-md-5 col-form-label required">User Name</label>
+        <div class="col-md-7">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-user"></i>
+            </span>
+            <input #username type="text" class="form-control" id="username" placeholder="User Name" formControlName="username" name="username"
+              [(ngModel)]="user.SEUS_USER_NAME">
+          </div>
+          <div class="form-control-feedback" *ngIf="maintainuserform.controls.username.invalid && (maintainuserform.controls.username.dirty || maintainuserform.controls.username.touched)">
+            User Name is required</div>
+        </div>
+      </div>
+      <div class="form-group row" [ngClass]="{'invalid-feedback': maintainuserform.controls.email.invalid 
+      && (maintainuserform.controls.email.dirty || maintainuserform.controls.email.touched)}">
+        <label for="email" class="col-md-5 col-form-label">Email ID</label>
+        <div class="col-md-7">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-envelope"></i>
+            </span>
+
+            <input #email type="email" class="form-control" id="email" placeholder="email@example.com" formControlName="email" name="email"
+              [(ngModel)]="user.SEUS_EMAIL">
+          </div>
+          <div class="form-control-feedback" *ngIf="maintainuserform.get('email').hasError('required') && (maintainuserform.controls.email.dirty || maintainuserform.controls.email.touched)">
+            Email ID is required</div>
+          <div class="form-control-feedback" *ngIf="maintainuserform.get('email').hasError('pattern') && (maintainuserform.controls.email.dirty || maintainuserform.controls.email.touched)">
+            Please enter valid Email ID</div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="isActive" class="col-md-5 col-form-label required">Is Active</label>
+        <div class="col-md-7">
+          <input #isActive type="checkbox" class="form-control float-left" id="isActive" placeholder="Is Active" formControlName="isActive"
+            name="isActive" [checked]="user.SEUS_IS_ACTIVE" [(ngModel)]="user.SEUS_IS_ACTIVE">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="isLocked" class="col-md-5 col-form-label required">Is Locked</label>
+        <div class="col-md-7 float-right">
+          <input #isLocked type="checkbox" class="form-control pull-right" id="isLocked" placeholder="Is Locked" formControlName="isLocked"
+            name="isLocked" [checked]="user.SEUS_IS_LOCKED" [(ngModel)]="user.SEUS_IS_LOCKED">
+
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-search" (click)="showPasswordField()">Reset Password</button>
+      </div>
+    </div>
+    <br>
+    <div [hidden]="!showpasswordField">
+      <div class="row"></div>
+      <div class="row">
+        <div class="col-md-4">
+          <input #newPassword type="password" class="form-control" id="newPassword" n
+          ame="newPassword" placeholder="New Password" [(ngModel)]="password">
+
+        </div>
+        <div class="col-md-4">
+          <span class="align-bottom">
+            <button class="btn btn-success" (click)="onResetPassword()">Save</button>
+            <button class="btn btn-danger" (click)="onCancelResetPassword()">Cancel</button>
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-header>
+    Roles Assigned
+    <span class="float-right">
+
+      <button class="btn btn-search" (click)="showRoleModal()">Add Roles</button>
+    </span>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="rolesettings" [source]="rolesource" (deleteConfirm)="onRoleDeleteConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<div class="form-group row">
+  <div class="col-lg-12">
+    <div *ngIf="deletebutton">
+      <span class="float-left">
+        <button class="btn btn-danger" (click)="onDelete()">Delete User</button>
+      </span>
+    </div>
+    <span class="float-right">
+      <button type="submit" class="btn btn-success" (click)="onSave()">Save</button>
+
+      <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+
+    </span>
+  </div>
+</div>

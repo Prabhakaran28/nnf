@@ -1,0 +1,126 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">
+    Upload Documents
+    <span class="float-right">Employee ID: {{employee_id}}</span>
+  </nb-card-header>
+  <nb-card-body>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="document">Document</label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="document" [(ngModel)]="documentType">
+              <option #document *ngFor="let s of document" [ngValue]="s">{{ s }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="fileuploader">Upload</label>
+          <div class="input-group">
+            <input type="file" id="fileuploader" ng2FileSelect [uploader]="uploader" multiple />
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+
+      <div style="margin-bottom: 40px" *ngIf = "uploader?.queue?.length>0">
+
+        <p>No. of Files: {{ uploader?.queue?.length }}</p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Document </th>
+              <th>Name</th>
+              <th>Size</th>
+              <th>Progress</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of uploader.queue">
+              <td>
+                <strong>{{ item?.formData?.DcoumentType }}</strong>
+              </td>
+              <td>
+                <strong>{{ item?.file?.name }}</strong>
+              </td>
+              <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+              <td *ngIf="uploader.isHTML5">
+                <div class="progress" style="margin-bottom: 0;">
+                  <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span *ngIf="item.isSuccess">
+                  <i class="fa fa-ok"></i>
+                </span>
+                <span *ngIf="item.isCancel">
+                  <i class="fa fa-ban"></i>
+                </span>
+                <span *ngIf="item.isError">
+                  <i class="fa fa-remove"></i>
+                </span>
+              </td>
+              <td nowrap>
+                <button type="button" class="btn btn-success btn-xs" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                  <i class="fa fa-upload"></i> Upload
+                </button>
+                <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()" [disabled]="!item.isUploading">
+                  <i class="fa fa-ban"></i> Cancel
+                </button>
+                <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                  <i class="fa fa-trash"></i> Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div>
+          <div>
+            Queue progress:
+            <div class="progress" style="">
+              <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+            <i class="fa fa-upload"></i> Upload all
+          </button>
+          <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+            <i class="fa fa-ban"></i> Cancel all
+          </button>
+          <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+            <i class="fa fa-trash"></i> Remove all
+
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-header class="bg-primary text-white">
+    Documents
+  </nb-card-header>
+  <nb-card-body>
+    <toaster-container ></toaster-container>
+    <div class="float-right">
+      <!--<export-table [source]="source" [settings]="settings"></export-table>-->
+    </div>
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDelete($event)">
+    </ng2-smart-table>
+    </nb-card-body>
+</nb-card>>

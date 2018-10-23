@@ -1,0 +1,127 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">Search Website
+    <span class="float-right">
+      <a class="text-white" routerLink="/pages/seo/maintainwebsite" routerLinkActive="active">Create Website</a>
+    </span>
+  </nb-card-header>
+  <nb-card-body>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="website">Website </label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-check-circle"></i>
+                </span>
+                <select class="form-control" id="website" [ngModelOptions]="{standalone: true}" [(ngModel)]="websiteDefault">
+                  <option #document *ngFor="let s of website" [ngValue]="s.BLWS_WEBSITE">{{ s.BLWS_WEBSITE }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="category">Category </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="category" [ngModelOptions]="{standalone: true}" [(ngModel)]="category.selectedOption.id">
+              <option #document *ngFor="let s of category.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+            <label for="addedBy">Added by </label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-check-circle"></i>
+              </span>
+              <select class="form-control" id="addedBy" [ngModelOptions]="{standalone: true}" [(ngModel)]="addedByDefualt">
+                <option #document *ngFor="let s of addedBy" [ngValue]="s.BLWS_CRATED_BY">{{ s.BLWS_CRATED_BY }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="websitecreateddatefromControl">Website Created From Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="websitecreateddatefromControl" [(ngModel)]="websitecreateddatefrom" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="websitecreateddatefromControl"></mat-datepicker-toggle>
+              <mat-datepicker #websitecreateddatefromControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="websitecreateddatetoControl">Website Created To Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="websitecreateddatetoControl" [(ngModel)]="websitecreateddateto" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="websitecreateddatetoControl"></mat-datepicker-toggle>
+              <mat-datepicker #websitecreateddatetoControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="modifiedby">Modified By
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <input type="text" class="form-control" id="modifiedby" [(ngModel)]="modifiedby" placeholder="Modified By" data-validation="modifiedby">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="float-right bottom-align-text">
+          <br/>
+          <br/>
+          <button class="btn btn-search" id="search" (click)="onSearch()">
+            <i class="fa fa-search"></i> &nbsp; Search</button>
+        </div>
+      </div>
+    </div>
+
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-body>
+    <toaster-container></toaster-container>
+    <span class="float-left">
+      <b> Row Count: {{tablesource.count()}}</b>
+    </span>
+    <span class="float-right">
+      <export-table [source]="tablesource" [settings]="settings"></export-table>
+    </span>
+    <ng2-smart-table [settings]="settings" [source]="tablesource">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

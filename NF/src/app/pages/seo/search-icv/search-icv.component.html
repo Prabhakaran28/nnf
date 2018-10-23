@@ -1,0 +1,221 @@
+<nb-card>
+  <nb-card-header class="bg-primary text-white">Search ICV
+    <span class="float-right">
+      <a class="text-white" routerLink="/pages/seo/maintainicv" routerLinkActive="active">Create ICV</a>
+    </span>
+  </nb-card-header>
+  <nb-card-body>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="backlinkSite">Promotional Site
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <input type="text" class="form-control" id="backlinkSite" [(ngModel)]="backlinkSite" placeholder="Backlink Site" data-validation="backlinkSite">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="category">Category </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="category" [ngModelOptions]="{standalone: true}" [(ngModel)]="category.selectedOption.id">
+              <option #document *ngFor="let s of category.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="process">Process </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="process" [ngModelOptions]="{standalone: true}" [(ngModel)]="process.selectedOption.id">
+              <option #document *ngFor="let s of process.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="dateIdenfiiedFromControl">Date Identified Start Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="dateIdenfiiedFromControl" [(ngModel)]="dateIdenfiiedFrom" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="dateIdenfiiedFromControl"></mat-datepicker-toggle>
+              <mat-datepicker #dateIdenfiiedFromControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="dateIdenfiiedToControl">Date Identified End Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="dateIdenfiiedToControl" [(ngModel)]="dateIdenfiiedTo" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="dateIdenfiiedToControl"></mat-datepicker-toggle>
+              <mat-datepicker #dateIdenfiiedToControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="addedBy">Added by </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="addedBy" [ngModelOptions]="{standalone: true}" [(ngModel)]="addedByDefualt">
+              <option #document *ngFor="let s of addedBy" [ngValue]="s.BLIC_ADDED_BY">{{ s.BLIC_ADDED_BY }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="source">Source </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="source" [ngModelOptions]="{standalone: true}" [(ngModel)]="sourceDefualt">
+              <option #document *ngFor="let s of source" [ngValue]="s.BLIC_DOMAIN_SOURCE">{{ s.BLIC_DOMAIN_SOURCE }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="sourceURL">Source URL
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <input type="text" class="form-control" id="sourceURL" [(ngModel)]="sourceURL" placeholder="Source URL" data-validation="sourceURL">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="followFlag">Follow Flag </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="followFlag" [ngModelOptions]="{standalone: true}" [(ngModel)]="followFlag.selectedOption.id">
+              <option #document *ngFor="let s of followFlag.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="domainAuthorityFrom">Domain Authority From </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="domainAuthorityFrom" [ngModelOptions]="{standalone: true}" [(ngModel)]="domainAuthorityFrom.selectedOption.id">
+              <option #document *ngFor="let s of domainAuthorityFrom.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="domainAuthorityTo">Domain Authority To </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="domainAuthorityTo" [ngModelOptions]="{standalone: true}" [(ngModel)]="domainAuthorityTo.selectedOption.id">
+              <option #document *ngFor="let s of domainAuthorityTo.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="status">Status </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-check-circle"></i>
+            </span>
+            <select class="form-control" id="status" [ngModelOptions]="{standalone: true}" [(ngModel)]="status.selectedOption.id">
+              <option #document *ngFor="let s of status.availableOptions" [ngValue]="s.id">{{ s.name }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="modifiedby">Modified By
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <input type="text" class="form-control" id="modifiedby" [(ngModel)]="modifiedby" placeholder="Modified By" data-validation="modifiedby">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="float-right bottom-align-text">
+          <br/>
+          <br/>
+          <button class="btn btn-search" id="search" (click)="onSearch()">
+            <i class="fa fa-search"></i> &nbsp; Search</button>
+        </div>
+      </div>
+    </div>
+
+  </nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-body>
+    <toaster-container></toaster-container>
+    <span class="float-left">
+      <b> Row Count: {{tablesource.count()}}</b>
+    </span>
+    <span class="float-right">
+      <export-table [source]="tablesource" [settings]="settings"></export-table>
+    </span>
+    <ng2-smart-table [settings]="settings" [source]="tablesource">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

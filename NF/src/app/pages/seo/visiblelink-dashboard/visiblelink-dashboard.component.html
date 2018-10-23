@@ -1,0 +1,110 @@
+<nb-card>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="fromControl">From Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="fromControl" [(ngModel)]="fromDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="fromControl"></mat-datepicker-toggle>
+              <mat-datepicker #fromControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="ToControl">To Date
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <mat-form-field class="form-control">
+              <input matInput [matDatepicker]="ToControl" [(ngModel)]="toDate" placeholder="(MM/DD/YYYY)">
+              <mat-datepicker-toggle matSuffix [for]="ToControl"></mat-datepicker-toggle>
+              <mat-datepicker #ToControl disabled="false"></mat-datepicker>
+
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="website">Website
+          </label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-tasks"></i>
+            </span>
+            <select class="form-control" id="website" [(ngModel)]="website">
+              <option #document *ngFor="let s of websites" [ngValue]="s.WEBSITES">{{ s.WEBSITES }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <div class="float-right bottom-align-text">
+          <br/>
+          <br/>
+          <button class="btn btn-search" id="search" (click)="onSearch('SITE')">
+            <i class="fa fa-refresh"></i> &nbsp; Refresh</button>
+        </div>
+      </div>
+
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="websitechart">
+  <nb-card-body>
+    <toaster-container></toaster-container>
+    <div class="md-col-12">
+      <div *ngIf="websitechart">
+        <canvas height="50px" id="websitechartcanvas">{{ websitechart }}</canvas>
+      </div>
+
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="subchart" [hidden]="!showChart">
+  <nb-card-body>
+
+    <div class="md-col-6">
+      <div *ngIf="categorychart">
+        <canvas height="150px" id="categorychartcanvas">{{ categorychart }}</canvas>
+      </div>
+    </div>
+    <div class="md-col-6">
+      <div *ngIf="resourcechart">
+        <canvas height="150px" id="resourcechartcanvas">{{ resourcechart }}</canvas>
+      </div>
+    </div>
+    <div class="md-col-6">
+      <div *ngIf="dachart">
+        <canvas height="150px" id="dachartcanvas">{{ dachart }}</canvas>
+      </div>
+    </div>
+    <div *ngIf="dataTable">
+      <span class="float-left">
+        <b> Row Count: {{tablesource.count()}}</b>
+      </span>
+      <span class="float-right">
+        <export-table [source]="tablesource" [settings]="settings"></export-table>
+      </span>
+      <ng2-smart-table [settings]="settings" [source]="tablesource">
+      </ng2-smart-table>
+    </div>
+  </nb-card-body>
+</nb-card>
